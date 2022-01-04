@@ -2,7 +2,6 @@
 #include <math.h>
 using namespace std;
 int arr[1000001] = { 0 };
-int cnt = 0;
 
 void fun(int n) {
 	arr[1] = 0;
