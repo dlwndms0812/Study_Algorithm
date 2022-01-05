@@ -1,5 +1,4 @@
 #include <iostream>
-#include <math.h>
 using namespace std;
 int dp[1001] = { 0 };
 
