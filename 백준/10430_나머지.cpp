@@ -14,3 +14,4 @@ int main() {
     cout << ((a % c) * (b % c)) % c << endl;
 	return 0;
 }
+
