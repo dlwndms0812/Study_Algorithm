@@ -27,3 +27,25 @@ public:
         
     }
 };
+
+//다른 풀이
+#include <algorithm>
+
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        nums.push_back(target);
+        sort(nums.begin(), nums.end());
+
+        int result;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            if (nums[i] == target)
+            {
+                result = i;
+                break;
+            }
+        }
+        return result;
+    }
+};
