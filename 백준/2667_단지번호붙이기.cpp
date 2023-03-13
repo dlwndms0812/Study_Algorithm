@@ -1,3 +1,4 @@
+//dfs
 #include <iostream>
 #include <algorithm>
 #include <cstring>
@@ -70,4 +71,95 @@ int main() {
     }
     return 0;
 }
-   
+
+
+//bfs
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <utility>
+#include <algorithm>
+
+using namespace std;
+
+int n;
+
+int arr[26][26];
+int visited[26][26];
+
+int dy[4] = { 1, 0, -1, 0 };
+int dx[4] = { 0, 1, 0, -1 };
+
+int bfs(int y, int x)
+{
+    visited[y][x] = 1;
+    
+    queue<pair<int, int>> q;
+    
+    q.push({y, x});
+    
+    int cnt = 1;
+    while (!q.empty())
+    {
+        int yy = q.front().first;
+        int xx = q.front().second;
+        q.pop();
+        
+        for (int i = 0; i < 4; i++)
+        {
+            int ny = yy + dy[i];
+            int nx = xx + dx[i];
+           
+            if (ny < 0 || nx < 0 || ny >= n || nx >= n)
+                continue;
+
+            if (arr[ny][nx] == 0 || visited[ny][nx] == 1)
+                continue;
+        
+            q.push({ny, nx});
+            visited[ny][nx] = 1;
+            cnt++;
+        }
+    }
+    return (cnt);
+}
+
+int main()
+{
+    cin >> n;
+    
+    for (int i = 0; i < n; i++)
+    {
+        string str;
+        
+        cin >> str;
+        for (int j = 0; j < n; j++)
+        {
+            arr[i][j] = str[j] - '0';
+            visited[i][j] = 0;
+        }
+    }
+    
+    vector<int> v;
+    int cnt = 0;
+    
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (arr[i][j] == 1 && visited[i][j] == 0)
+            {
+                int tmp = bfs(i, j);
+                v.push_back(tmp);
+                cnt++;
+            }
+        }
+    }
+    
+    sort(v.begin(), v.end());
+    
+    printf("%d\n", cnt);
+    for (int i = 0; i < cnt; i++)
+        printf("%d\n", v[i]);
+    return 0;
+}
